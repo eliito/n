@@ -1,0 +1,261 @@
+/* ======================================================== */
+/* CSS Reset */
+/* ======================================================== */
+
+@charset "utf-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a, button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input, textarea {
+    -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+    all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+    color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+    content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+    display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable="false"])) {
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+    -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+    all: revert;
+}
+
+/* ============================================================ */
+/* General Base Styles */
+/* ============================================================ */
+
+:root {
+  --dark-cyan: hsl(185, 75%, 39%);
+  --very-dark-desaturated-blue: hsl(229, 23%, 23%);
+  --dark-grayish-blue: hsl(227, 10%, 46%);
+  --dark-gray: hsl(0, 0%, 59%);
+}
+
+html {
+  font-size: .625rem;
+  font-family: 'Kumbh Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background-color: var( --dark-cyan );
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+p {
+  color: var( --dark-gray );
+}
+
+/* ============================================================ */
+/* Profile Card Styles */
+/* ============================================================ */
+
+.profile-card {
+  max-width: 335px;
+  margin-bottom: 2rem;
+  position: relative;
+  border-radius: 10px;
+}
+
+.profile-card::before {
+  content: "";
+  background-image: url( "./images/bg-pattern-top.svg" );
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: translate( -78%, -65%);
+  z-index: -1;
+}
+
+.profile-card::after {
+  content: "";
+  background-image: url( "./images/bg-pattern-bottom.svg" );
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200%;
+  height: 200%;
+  transform: translate( 75%, 73% );
+  z-index: -1;
+}
+
+.profile-bg-image {
+  width: 100%;
+  display: block;
+  border-radius: 10px 10px 0 0;
+}
+
+.profile-content {
+  background-color: #FFFFFF;
+  position: relative;
+  padding-top: 7rem;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+.profile-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate( -50%, -50% );
+  border-radius: 50%;
+  border: 6px solid #FFFFFF;
+}
+
+.profile-name-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  margin-bottom: .8rem;
+}
+
+.profile-name {
+  margin-right: .8rem;
+  font-weight: 700;
+}
+
+.profile-city {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.stats-area {
+  border-top: 1px solid  hsla(0, 0%, 59%, 30%);
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.stat-number {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: .6rem;
+}
+
+.stat-title {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.attribution { 
+  font-size: 11px; text-align: center;
+  font-size: 1.4rem;
+}
+    
+.attribution a { 
+  color: hsl(228, 45%, 44%);
+}
+
+@media screen and ( min-width: 1024px ) {
+  .profile-card::before,
+  .profile-card::after {
+    width: 300%;
+    height: 300%;
+  }
+
+  .profile-card::before {
+    transform: translate( -85%, -65% );
+  }
+
+  .profile-card::after {
+    transform: translate( 82%, 82% );
+  }
+}
